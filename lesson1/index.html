@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Lesson 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 class="title">{{ message }}</h1>
+        <h2>{{ sayHello() }}</h2>
+        <button @click="changeText">click</button>
+        <button @click="incrementCounter(5, $event)">counter {{ counter }}</button>
+        <h2 v-on:mousemove="mouseMove($event)">
+            Mouse move {{ mousePosition.x }} - {{ mousePosition.y }}
+            <span v-on:mousemove.stop.prevent>stop text</span>
+        </h2>
+        <p v-html="bigText"></p>
+        <h3 v-if="productAddInCart">Добавить товар в корзину?</h3>
+        <h3 v-else="!productAddInCart">Товар добавлен в корзину</h3>
+        <button @click="productAddInCart = !productAddInCart">Add Product</button>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const productAddInCart = ref(true)
+                const message = ref('Hello Vue.js!')
+                const counter = ref(0)
+                const mousePosition = ref({ x: 0, y: 0 })
+                const bigText = ref('big text <span>new test <a href="#">info</a> </span>')
+                const sayHello = () => `SayHello ${message.value}!`
+                const changeText = () => message.value = 'Goodbye Vue.js!'
+                const incrementCounter = (step = 1, event) => {
+                    counter.value += step;
+                    console.log(event.target);
+                };
+                const mouseMove = (event) => {
+                    mousePosition.value = { x: event.clientX, y: event.clientY }
+                };
+                return {
+                    message,
+                    counter,
+                    productAddInCart,
+                    mousePosition,
+                    bigText,
+                    incrementCounter,
+                    sayHello,
+                    changeText,
+                    mouseMove,
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        li {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="example-1">
+            <button @click="reverseMessage">{{ message }}</button>
+        </div>
+        <div class="example-2">
+            <input v-model="inputText" />
+            <button @click="addToList">Добавить</button>
+            <ul @click="deleteList($event)">
+                <li v-for="item in list" :key="item">{{ item }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const app = {
+            data() {
+                return {
+                    message: 'Перевернуть',
+                    inputText: '',
+                    list: []
+                }
+            },
+            methods: {
+                reverseMessage() {
+                    this.message = this.message.split('').reverse().join('');
+                },
+                addToList() {
+                    this.list.push(this.inputText);
+                    this.inputText = '';
+                },
+                deleteList(event) {
+                    if (event.target.tagName === 'LI') {
+                        this.list.splice(this.list.indexOf(event.target.textContent), 1);
+                    }
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+</body>
+
+</html>

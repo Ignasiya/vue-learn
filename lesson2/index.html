@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .block {
+            width: 100px;
+            height: 100px;
+        }
+
+        .btn {
+            width: 35px;
+            height: 35px;
+        }
+
+        .like {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" @keyup.enter="send()"> <button @click="send()">Отправить</button>
+        <h2>link elem</h2>
+        <a v-bind:href="linkHref">my link</a>
+        <img :src="imgPhoto" alt="">
+        <h2>Конструктор</h2>
+        <input type="text" v-model="blockWidth">
+        <input type="text" v-model="blockColor">
+        <div :style="change" class="block">
+            Lorem ipsum dolor sit amet.
+        </div>
+        <h2>{{ modelValue }}</h2>
+        <input type="text" v-model.lazy="modelValue">
+        <button @click="headingText" class="heading_button">click heading</button>
+        <h2>Калькулятор</h2>
+        <input type="text" v-model.number="firstNumber">
+        <input type="text" v-model.number="secondNumber">
+        = {{ result }}
+        <div>
+            <button @click="sum">+</button>
+            <button @click="subtract">-</button>
+            <button @click="multiply">*</button>
+            <button @click="divide">/</button>
+        </div>
+        <h2>list</h2>
+        <ul class="list">
+            <li v-for="item in listItem" :key="item.id">{{ item }}</li>
+        </ul>
+        <input type="text" v-model="newList" @keyup.enter="addItem">
+        <article v-for="article in data" :key="article.id" class="article">
+            <h2 class="article__title">{{article.title}}</h2>
+            <p class="article__text">{{article.text}}</p>
+            <button @click="likeToggle = !likeToggle" :class="{like: likeToggle}" class="btn">like</button>
+        </article>
+    </div>
+
+    <script>
+        const app = {
+            data() {
+                return {
+                    likeToggle: false,
+                    data: [
+                        {
+                            title: 'text',
+                            text: 'description text',
+                        },
+                        {
+                            title: 'old text',
+                            text: 'description text',
+                        },
+                        {
+                            title: 'new text',
+                            text: 'description text',
+                        },
+                    ],
+                    listItem: [1, 2, 3],
+                    newList: [],
+                    blockWidth: '100',
+                    blockColor: 'blue',
+                    firstNumber: 0,
+                    secondNumber: 0,
+                    result: 0,
+                    modelValue: '',
+                    linkHref: 'product.html',
+                    imgPhoto: '',
+                }
+            },
+            methods: {
+                addItem() {
+                    this.listItem.push(this.newList);
+                },
+                headingText() {
+                    if (this.modelValue === '') {
+                        this.modelValue = 'Заголовок';
+                        return;
+                    }
+                },
+                send() {
+                    console.log('отправили');
+                },
+                sum() {
+                    this.result = this.firstNumber + this.secondNumber;
+                },
+                subtract() {
+                    this.result = this.firstNumber - this.secondNumber;
+                },
+                multiply() {
+                    this.result = this.firstNumber * this.secondNumber;
+                },
+                divide() {
+                    if (this.secondNumber === 0) {
+                        alert('деление на ноль!');
+                        return;
+                    }
+                    this.result = (this.firstNumber / this.secondNumber).toFixed(2);
+                }
+            },
+            computed: {
+                change() {
+                    return {
+                        width: this.blockWidth + 'px',
+                        height: this.blockWidth + 'px',
+                        backgroundColor: this.blockColor,
+                    }
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+
+</html>

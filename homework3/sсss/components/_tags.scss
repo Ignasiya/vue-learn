@@ -21,10 +21,10 @@
             color: var(--color-background);
             background-color: var(--color-font-title);
         }
+    }
 
-        &__active {
-            color: var(--color-background);
-            background-color: var(--color-font-title);
-        }
+    &__active {
+        color: var(--color-background);
+        background-color: var(--color-font-title);
     }
 }

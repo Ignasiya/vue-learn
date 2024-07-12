@@ -1,16 +1,14 @@
 <template>
-  <BasicLayout>
-    <template #main-content> Привет </template>
-  </BasicLayout>
+  <HomePage />
 </template>
 
 <script>
-import BasicLayout from './layouts/BasicLayout.vue'
+import HomePage from './pages/HomePage.vue'
 
 export default {
   name: 'App',
   components: {
-    BasicLayout
+    HomePage
   }
 }
 </script>

@@ -1,6 +1,6 @@
 .modern {
   &__list {
-    gap: 30px;
+    column-count: 2;
 
     @include desktop {
       grid-gap: 20px;

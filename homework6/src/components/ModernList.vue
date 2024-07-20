@@ -1,13 +1,13 @@
 <template>
   <div class="modern">
-    <ul class="modern__list grid grid--2">
+    <ul class="modern__list" :class="{ 'grid grid--2': isGrid }">
       <li
         v-for="item in modern_card"
         :key="item.id"
         class="modern__item"
         :class="{ modern__rounded: isRounded }"
       >
-        <article class="modern-card">
+        <article class="modern-card" :style="{ 'padding-bottom': !isGrid ? '40px' : 'unset' }">
           <img
             class="modern-card__image"
             :src="item.image"
@@ -51,6 +51,10 @@ export default {
       required: true
     },
     isRounded: {
+      type: Boolean,
+      default: false
+    },
+    isGrid: {
       type: Boolean,
       default: false
     }

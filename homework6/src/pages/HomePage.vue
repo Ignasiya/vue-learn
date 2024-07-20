@@ -9,7 +9,7 @@
         title="Следите за нашими проектами"
         description="Хорошо известно, что читатель будет отвлекаться на читабельный контент страницы"
       >
-        <ModernList :isTag="true" :isRounded="true" :modern_card="modern_card" />
+        <ModernList :isGrid="true" :isRounded="true" :modern_card="modern_card" />
       </SectionContent>
 
       <ExperianceJob />
